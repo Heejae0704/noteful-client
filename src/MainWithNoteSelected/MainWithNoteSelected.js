@@ -14,7 +14,7 @@ class MainWithNoteSelected extends React.Component {
     static contextType = ApiContext;
     render() {
         const noteId = this.props.match.params.noteId;
-        const selectedNote = this.context.notes.find(note => note.id === noteId) || {}
+        const selectedNote = this.context.notes.find(note => note.id === Number(noteId)) || {}
         return (
             <div className="main__container">
                 <div className="main__notelist">

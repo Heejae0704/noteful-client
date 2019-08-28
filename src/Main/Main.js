@@ -18,7 +18,7 @@ class Main extends Component {
         return (
             <div className="main__container">
                 <div className="main__notelist">
-                    {(!folderId ? notes : notes.filter(note => note.folderId === folderId)).map(note => {
+                    {(!folderId ? notes : notes.filter(note => note.folderid === Number(folderId))).map(note => {
                         return (<Note key={note.id} note={note} />)
                     })}
                     <Link to='/addNote'><button className='addnote__button'>Add Note</button></Link>

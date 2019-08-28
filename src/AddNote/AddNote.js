@@ -2,6 +2,7 @@ import React from 'react';
 import ApiContext from '../ApiContext'
 import ValidationError from '../ValidationError'
 import './AddNote.css'
+import config from '../config'
 
 class AddNote extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class AddNote extends React.Component {
     static contextType = ApiContext;
 
     getFolderFromNote(noteId) {
-        const note = this.context.notes.find(note => note.id === noteId);
+        const note = this.context.notes.find(note => note.id === Number(noteId));
         const folder = this.context.folders.find(folder => folder.id === note.folderId);
         return folder;
     }
@@ -53,7 +54,7 @@ class AddNote extends React.Component {
             folderId: this.state.folderId.value,
             content: this.state.content.value,
         }
-        const url = "http://localhost:9090/notes";
+        const url = config.API_ENDPOINT + "/api/notes";
         fetch(url, {
             method:"POST",
             body: JSON.stringify(note),
@@ -140,9 +141,10 @@ class AddNote extends React.Component {
                         name="folderId"
                         id="folderId"
                         onChange={e => this.updateFolderId(e.target.value)}>
+                            <option value="None">Select Folder</option>
                         {this.context.folders.map(folder => {
                             return (
-                                <option key={folder.id} value={folder.id}>{folder.name}</option>
+                                <option key={folder.id} value={folder.id}>{folder.foldername}</option>
                             )
                         })}
                     </select>

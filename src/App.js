@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom'
 import AddFolder from './AddFolder/AddFolder'
 import AddNote from './AddNote/AddNote'
 import ErrorBoundary from './ErrorBoundary'
+import config from './config'
 
 
 class App extends Component {
@@ -22,8 +23,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const folderUrl = 'http://localhost:9090/folders'
-    const noteUrl = 'http://localhost:9090/notes'
+    const folderUrl = config.API_ENDPOINT + '/api/folders'
+    const noteUrl = config.API_ENDPOINT + '/api/notes'
     fetch(folderUrl, {
       method: 'GET',
       headers: {
@@ -66,7 +67,7 @@ class App extends Component {
   }
 
   deleteNote = (noteId) => {
-    const newNotes = this.state.notes.filter(note => note.id !== noteId)
+    const newNotes = this.state.notes.filter(note => note.id !== Number(noteId))
     this.setState({
       notes: newNotes
     })

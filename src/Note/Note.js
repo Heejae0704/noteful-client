@@ -4,10 +4,11 @@ import './Note.css';
 import ApiContext from '../ApiContext'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import config from '../config'
 
 function deleteNoteRequest(event, noteId, callback) {
     event.preventDefault()
-    const url = `http://localhost:9090/notes/${noteId}`
+    const url = config.API_ENDPOINT + `/api/notes/${noteId}`
     fetch(url, {
         method: 'DELETE',
         headers: {
@@ -20,7 +21,7 @@ function deleteNoteRequest(event, noteId, callback) {
                     throw error
                 })
             }
-            return res.json()
+            // return res.json()
         })
         .then(() => {
             callback(noteId)
