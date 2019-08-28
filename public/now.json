@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "alias": "heejae-noteful-app",
     "name": "bnoteful-client",
     "routes": [
         {
